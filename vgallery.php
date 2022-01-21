@@ -41,44 +41,32 @@
 
 </style>
 <div class="content">
-	
-	<form action="" method="post" enctype="multipart/form-data">
-	<table border=0 width="100%" cellspacing="5" cellpadding="5" style="box-shadow: 5px 4px 10px 2px;">
-
-		<tr>
-			<th colspan="2">Upload Your Image Here &nbsp;&nbsp;&nbsp;&nbsp; <a href="vgallery.php">View Gallery</a></th>
-		</tr>
-		<tr>
-			<th>&nbsp;</th>
-		</tr>
-		<tr>
-			<td align="right" width="50%">Choose Image Here</td><td><input type="file" name="img" value=""></td>
-		</tr>
-		<tr>
-			<td colspan="2" align="center"><input type="submit" class="btn" name="sb" value="    Upload Now    "></td>
-		</td>
-		<tr>
-			<th>&nbsp;</th>
-		</tr>
-
-	
-
-	</table>
-	</form>
-	<?php
-	if(isset($_POST['sb']))
-	{
+	<center><a href="gallery.php" style="text-decoration: none; color: red;">Upload Gallery</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	<a href="vgallery.php" style="text-decoration: none; color: red;">View Gallery</a></center>
+	<?php include "connect.php";
 		
-		$i = "img/".$_FILES['img']['name'];
-		move_uploaded_file($_FILES['img']['tmp_name'], $i);//move file inside folder
+	 ?>
+		<table border=0 cellpadding="10" cellspacing="5">
+			<?php
+			$r = 0;
+			$s =mysqli_query($con,"select * from gallery");
+			while($row = mysqli_fetch_array($s))
+			{
+				if($r%4 == 0)
+		    	{
+					echo "<tr>";
+		    	}		 
+		   		echo"<td> <img src='{$row['image']}' alt='' width=210 height=210> <br><center><a href=dgallery.php?id={$row['id']} style='text-decoration:none; color:red;'>Delete</a></center> </td>"; 
+	           if($r%4 == 3) 
+	           {
+	           	    echo "</tr>";
+	           }
+	           $r++;
+	        }
+	        ?>
 
-		
-		include "connect.php";
-		mysqli_query($con,"insert into gallery(image)values('$i')") or die(mysqli_error($con));
-		echo "<div style='padding:15px; color:red; background-color:black; font-size:1.2em; border-radius:10px;'>Data Uploaded SuccessFully....</div>";
-	}
-	?>
-	<br><br>	
+		</table>
+		<br><br>	
 </div>
 
 

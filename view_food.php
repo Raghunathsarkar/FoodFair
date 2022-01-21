@@ -20,6 +20,7 @@
 <style type="text/css">
 	tr{
 		font-size: 1.2em;
+		color: #26947e;
 
 
 	}
@@ -30,7 +31,7 @@
 
 	}
 	th{
-		color: tomato;
+		color: blue;
 		font-size: 1.3em;
 	}
 	.del{
@@ -46,22 +47,28 @@
 
 </style>
 <div class="content">
-	<table border=1 width="100%" cellspacing="3" cellpadding="5" style="box-shadow: 5px 4px 10px 2px;">
+	<table border=1 width="100%" cellspacing="3" cellpadding="5" style="box-shadow: 5px 4px 10px 2px; font-family: times new roman;">
 
 		<tr>
-			<th>ID</th><th>NAME</th><th>REVIEW</th><th>COMMENTS</th><th>REMOVE</th>
+			<th>SUB CATAGORY</th>
+			<th>TITLE</th>
+			<th>DESCRIPTION</th>
+			<th>PRICE</th>
+			<th>IMAGE</th>
+			<th>REMOVE</th>
 		</tr>
 		<?php 
-			$s = mysqli_query($con,"select * from review");
+			$s = mysqli_query($con,"select * from menu");
 			while($r = mysqli_fetch_array($s))
 			{
 			?>
 				<tr align=center>
-					<td><?php echo $r['id']; ?></td>
-					<td><?php echo $r['name']; ?></td>
-					<td><?php echo $r['review']; ?></td>
+					<td><?php echo $r['sub_cat']; ?></td>
+					<td><?php echo $r['title']; ?></td>
 					<td><?php echo $r['description']; ?></td>
-					<td><a href="delreview.php?a=<?php echo $r['id']; ?>" class="del">DELETE</a></td>
+					<td><?php echo $r['price']; ?></td>
+					<td><img src="<?php echo $r['image']; ?>" width=70 height=70></td>
+					<td><a href="delfood.php?a=<?php echo $r['id']; ?>" class="del">DELETE</a></td>
 				</tr>	
 		<?php	
 			}
@@ -77,6 +84,6 @@
 <!-- Footer Start -->
 
 <br><br>
-<div class="footer"> Design & Developed By: Avadh Tutor</div>
+<div class="footer"> Design & Developed By: Foodfair </div>
 
 <!-- Footer end -->

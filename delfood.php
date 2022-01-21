@@ -46,33 +46,13 @@
 
 </style>
 <div class="content">
-	<table border=1 width="100%" cellspacing="3" cellpadding="5" style="box-shadow: 5px 4px 10px 2px;">
-
-		<tr>
-			<th>ID</th><th>NAME</th><th>REVIEW</th><th>COMMENTS</th><th>REMOVE</th>
-		</tr>
-		<?php 
-			$s = mysqli_query($con,"select * from review");
-			while($r = mysqli_fetch_array($s))
-			{
-			?>
-				<tr align=center>
-					<td><?php echo $r['id']; ?></td>
-					<td><?php echo $r['name']; ?></td>
-					<td><?php echo $r['review']; ?></td>
-					<td><?php echo $r['description']; ?></td>
-					<td><a href="delreview.php?a=<?php echo $r['id']; ?>" class="del">DELETE</a></td>
-				</tr>	
-		<?php	
-			}
-		?>
-
-
-	</table>	
-
-
+	<?php
+		$a = $_GET['a'];
+		mysqli_query($con,"delete from menu where id='$a'");
+		header("location:view_food.php");
+	?>
+		
 </div>
-
 
 <!-- Footer Start -->
 
